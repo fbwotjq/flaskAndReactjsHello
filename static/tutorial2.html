@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>React Tutorial</title>
+    <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script> <!-- babel 은 ECMAScript 6을 아직 호환되지 않는곳에서 사용하게 해주는 자바스크립트 컴파일러입니다. JSX를 사용가능하게 해줌 -->
+    <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <hr/>
+    <div id="secondContent"></div>
+    <hr/>
+    <div id="3Content"></div>
+    </body>
+    <script type="text/babel">
+
+        // jsx 관련 첫번째 실험 ==> JSX는 JavaScript의 Syntax 확장입니다. JSX를 사용하는것이 필수는 아니지만, 사용하는것이 권장
+        // 신기하게 이렇게 돌려도 돈다.... ==> 그러니까 잘 나가지..
+        var CommentBox = React.createClass({
+            render: function() {
+                return (<div className="commentBox">Hello, world! I am a CommentBox.</div>);
+            }
+        });
+        var CommentList = React.createClass({
+            render: function() {
+                return (<div className="commentList">Hello, world! I am a CommentList.</div>);
+            }
+        });
+        ReactDOM.render(<CommentBox />, document.getElementById('content'));
+
+        // 뷰에 컴포넌트 화 예제.. 근데 이거 쓸일이 있나?? 궁금하네... ==> Components – React는 전부 Component에 대한 것 입니다. React 개발을 할땐 모든것을 Component로서 생각해야 합니다.
+        var CommentForm = React.createClass({
+            render: function() {
+                return (<div className="commentForm">Hello, world! I am a CommentForm.</div>);
+            }
+        });
+        var CommentBox2 = React.createClass({
+            render: function() {
+                return (<div className="commentBox">
+                            <h1>Comments</h1>
+                            <CommentList />
+                            <CommentForm />
+                        </div>);
+            }
+        });
+        ReactDOM.render(<CommentBox2 />, document.getElementById('secondContent'));
+
+        // Using props 컴포넌트에 프로퍼티를 이용하여 컴포넌트 재사용 예
+        // 재사용이라는 메리트는 있지만 언제 이걸 쓸수 있을지 모르겠다..
+        var Comment = React.createClass({
+            render: function() {
+                return (
+                    <div className="comment">
+                        <h2 className="commentAuthor">{this.props.author}</h2>
+                        {this.props.children}
+                    </div>
+                );
+            }
+        });
+        var CommentList2 = React.createClass({
+            render: function() {
+                return (
+                <div className="commentList">
+                    <Comment author="Pete Hunt">This is one comment</Comment>
+                    <Comment author="Jordan Walke">This is *another* comment</Comment>
+                </div>
+                );
+            }
+        });
+        ReactDOM.render(<CommentList2 />, document.getElementById('3Content'));
+
+    </script>
+  </body>
+</html>
