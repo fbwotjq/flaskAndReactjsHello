@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React! state turorial ~~ </title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Counter extends React.Component {
+
+        constructor(props) {
+          super(props);
+          this.state = {
+            value: 0
+          }
+        }
+
+        handleClick() {
+          this.setState({
+            value: this.state.value + 1
+          });
+        }
+
+        //this.handleClick = this.handleClick.bind(this); ==> onClick={this.handleClick.bind(this)}를 대체하기 좋은 코드
+
+        render() {
+          return (
+            <div>
+              <h2>{this.state.value}</h2>
+              <button onClick={this.handleClick.bind(this)}>Press me</button>
+            </div>
+          )
+        }
+
+      }
+      class App extends React.Component {
+        render() {
+          return (<Counter />)
+        }
+      }
+
+      ReactDOM.render(<App></App>, document.getElementById('root'));
+
+    </script>
+  </body>
+</html>
